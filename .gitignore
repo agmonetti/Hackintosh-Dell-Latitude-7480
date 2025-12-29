@@ -1,0 +1,13 @@
+# macOS Recovery
+com.apple.recovery.boot/
+/com.apple.recovery.boot/
+
+# Windows / macOS basura
+System Volume Information/
+
+# Logs
+*.log
+*.txt
+
+# OpenCore debug
+*.dbg
