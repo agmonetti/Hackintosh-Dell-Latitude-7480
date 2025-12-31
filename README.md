@@ -12,7 +12,7 @@ Este repositorio contiene la configuración EFI (OpenCore) necesaria para ejecut
 | **Modelo** | Dell Latitude 7480 | |
 | **CPU** | Intel Core i7-7600U | Kaby Lake |
 | **GPU** | Intel HD Graphics 620 | Aceleración gráfica completa |
-| **RAM** | [Tu cantidad de RAM] | |
+| **RAM** | 16 GB] | |
 | **Almacenamiento** | SK hynix SC308 S | |
 | **Audio** | Realtek ALC3246 (ALC256) | Layout ID: 11 |
 | **Ethernet** | Intel I219-LM | |
@@ -65,7 +65,7 @@ Ubicados en `EFI/OC/ACPI`:
 * `alcid=11`: Habilita el audio (altavoces y micrófono).
 * `-vi2c-force-polling`: **Obligatorio** actualmente para que el cursor funcione, ya que el modo interrupción (GPIO) es inestable en este panel ALPS.
 
-## 📝 To Do / Mejoras Futuras
+## 📝 To Do 
 
 Lista de tareas pendientes para perfeccionar el sistema:
 
