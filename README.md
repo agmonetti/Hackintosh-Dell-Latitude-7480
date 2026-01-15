@@ -31,7 +31,7 @@ Para arrancar correctamente, la BIOS debe estar configurada así:
 ## 📂 Kexts Críticos y Orden de Carga
 
 ### Orden de Carga del Kernel (Crucial)
-El orden de los Kexts en `config.plist` -> `Kernel` -> `Add` es estricto para evitar Kernel Panics con el Touchpad ALPS I2C:
+El orden de los Kexts en `config.plist` -> `Kernel` -> `Add` es estricto para evitar Kernel Panics:
 
 1.  **Lilu.kext**
 2.  **VirtualSMC.kext**
