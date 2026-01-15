@@ -100,5 +100,5 @@ Este proyecto no sería posible sin las siguientes herramientas y documentación
 
 
 ## ⚠️ Disclaimer
-Por razones de seguridad, la información de **PlatformInfo** (Números de Serie, UUID, MLB y ROM) ha sido eliminada o "blanqueada" en el `config.plist`.
-**Debes generar tus propios seriales usando GenSMBIOS antes de intentar arrancar.** (Ver sección de Instrucciones).
+La información de **PlatformInfo** (Números de Serie, UUID, MLB y ROM) ha sido eliminada del `config.plist`.
+**Debes generar tus propios seriales usando GenSMBIOS.**
