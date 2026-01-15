@@ -90,12 +90,12 @@ Este proyecto no sería posible sin las siguientes herramientas y documentación
     - `Timeout`: **5**.
     - `PollAppleHotKeys`: **True** (Permite usar ESC para mostrar menú en emergencia).
 
-### Mejoras
+### Posibles mejoras
 - [ ] **Gestión de Energía Avanzada (CPUFriend):** Generar `CPUFriendDataProvider.kext` para optimizar frecuencias del i7-7600U.
 - [ ] **Interfaz Gráfica (OpenCanopy):** Instalar tema visual para el selector de arranque.
 - [ ] **Hibernación:** Desactivar hibernación profunda.
 
 
-### ⚠️ Disclaimer
+## ⚠️ Disclaimer
 Por razones de seguridad, la información de **PlatformInfo** (Números de Serie, UUID, MLB y ROM) ha sido eliminada o "blanqueada" en el `config.plist`.
 **Debes generar tus propios seriales usando GenSMBIOS antes de intentar arrancar.** (Ver sección de Instrucciones).
