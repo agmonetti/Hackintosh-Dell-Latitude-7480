@@ -69,6 +69,7 @@ Ubicados en `EFI/OC/ACPI`:
 Este proyecto no sería posible sin las siguientes herramientas y documentación:
 
 * **[Dortania's OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide/):** La biblia del Hackintosh.
+* **[Lovely-XPP's Hackintosh Guide](https://github.com/Lovely-XPP/Dell-Latitude-E7480-Hackintosh/tree/main):** Repo de mucha ayuda.
 * **[OpenCore Pkg](https://github.com/acidanthera/OpenCorePkg):** Bootloader.
 * **[ProperTree](https://github.com/corpnewt/ProperTree):** Editor de `.plist` multiplataforma (Python).
 * **[GenSMBIOS](https://github.com/corpnewt/GenSMBIOS):** Para generar números de serie únicos (SMBIOS MacBookPro14,1).
