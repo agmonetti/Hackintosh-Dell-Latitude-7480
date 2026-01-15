@@ -1,9 +1,8 @@
 # Hackintosh Dell Latitude 7480 - macOS Ventura
 
-Este repositorio contiene la configuración EFI (OpenCore) necesaria para ejecutar macOS Ventura en una Dell Latitude 7480.
+![macOS Ventura](https://img.shields.io/badge/macOS-Ventura-blue) ![OpenCore](https://img.shields.io/badge/OpenCore-0.9.x-green) ![Status](https://img.shields.io/badge/Status-Functional-brightgreen)
 
-> **Estado:** Funcional (Gráficos, Audio, Teclado, Touchpad con gestos).
-> **Bootloader:** OpenCore
+Este repositorio contiene la configuración EFI (OpenCore) que,  **me funciono a mi** para ejecutar macOS Ventura en una Dell Latitude 7480.
 
 ## 💻 Especificaciones de Hardware
 
@@ -12,13 +11,14 @@ Este repositorio contiene la configuración EFI (OpenCore) necesaria para ejecut
 | **Modelo** | Dell Latitude 7480 | |
 | **CPU** | Intel Core i7-7600U | Kaby Lake |
 | **GPU** | Intel HD Graphics 620 | Aceleración gráfica completa |
-| **RAM** | 16 GB] | |
-| **Almacenamiento** | SK hynix SC308 S | |
+| **RAM** | 16 GB | DDR4 |
+| **Almacenamiento** | SK hynix SC308 S | SATA M.2 |
 | **Audio** | Realtek ALC3246 (ALC256) | Layout ID: 11 |
 | **Ethernet** | Intel I219-LM | |
 | **Touchpad** | ALPS I2C | Requiere configuración especial AlpsHID |
+| **Wifi/BT** | Intel Dual Band Wireless-AC | Requiere AirportItlwm |
 
-## ⚙️ Configuración de BIOS
+## ⚙️ BIOS
 
 Para arrancar correctamente, la BIOS debe estar configurada así:
 
@@ -28,17 +28,17 @@ Para arrancar correctamente, la BIOS debe estar configurada así:
 * **Virtualization (VT-d):** Disabled (o usar `DisableIoMapper` en config.plist)
 * **Fast Boot:** Minimal o Disabled
 
-## 📂 Estructura y Kexts Críticos
+## 📂 Kexts Críticos y Orden de Carga
 
 ### Orden de Carga del Kernel (Crucial)
-El orden de los Kexts en `config.plist` -> `Kernel` -> `Add` es estricto para evitar Kernel Panics con el Touchpad ALPS:
+El orden de los Kexts en `config.plist` -> `Kernel` -> `Add` es estricto para evitar Kernel Panics con el Touchpad ALPS I2C:
 
 1.  **Lilu.kext**
 2.  **VirtualSMC.kext**
 3.  **WhateverGreen.kext**
 4.  **AppleALC.kext**
 5.  **VoodooPS2Controller.kext** (Teclado)
-6.  **VoodooPS2Keyboard.kext**
+6.  **VoodooPS2Keyboard.kext** (Plugin)
 7.  **VoodooI2CServices.kext**
 8.  **VoodooGPIO.kext**
 9.  **VoodooInput.kext** (Versión de VoodooI2C - Enabled: True)
@@ -46,11 +46,10 @@ El orden de los Kexts en `config.plist` -> `Kernel` -> `Add` es estricto para ev
 11. **VoodooI2CHID.kext** (Versión modificada para compatibilidad ALPS)
 12. **AlpsHID.kext** (Driver satélite específico para Dell ALPS)
 
-> **Nota:** `VoodooPS2Trackpad.kext` y el `VoodooInput` de PS2 deben estar **Desactivados (False)**.
+> **Nota:** `VoodooPS2Trackpad.kext` y el `VoodooInput` que viene dentro de PS2 deben estar **Desactivados (False)** en el config.plist.
 
 ### Parches ACPI (SSDTs)
 Ubicados en `EFI/OC/ACPI`:
-
 * `SSDT-EC-USBX-LAPTOP.aml` (Gestión de energía embebida)
 * `SSDT-PLUG-DRTNIA.aml` (Gestión de energía CPU)
 * `SSDT-PNLF.aml` (Brillo de pantalla)
@@ -63,25 +62,41 @@ Ubicados en `EFI/OC/ACPI`:
 * `-v`: Modo verbose (texto de arranque).
 * `keepsyms=1 debug=0x100`: Depuración de pánicos.
 * `alcid=11`: Habilita el audio (altavoces y micrófono).
-* `-vi2c-force-polling`: **Obligatorio** actualmente para que el cursor funcione, ya que el modo interrupción (GPIO) es inestable en este panel ALPS.
+* `-vi2c-force-polling`: **Obligatorio** actualmente para que el cursor funcione (modo Polling), ya que el modo interrupción (GPIO) es inestable en este panel ALPS.
+
+## 🛠 Herramientas y Recursos Utilizados
+
+Este proyecto no sería posible sin las siguientes herramientas y documentación:
+
+* **[Dortania's OpenCore Install Guide](https://dortania.github.io/OpenCore-Install-Guide/):** La biblia del Hackintosh.
+* **[OpenCore Pkg](https://github.com/acidanthera/OpenCorePkg):** Bootloader.
+* **[ProperTree](https://github.com/corpnewt/ProperTree):** Editor de `.plist` multiplataforma (Python).
+* **[GenSMBIOS](https://github.com/corpnewt/GenSMBIOS):** Para generar números de serie únicos (SMBIOS MacBookPro14,1).
+* **[USBMap](https://github.com/corpnewt/USBMap) / [USBToolBox](https://github.com/USBToolBox/tool):** Para el mapeo correcto de puertos USB y evitar problemas de reposo/encendido.
+* **[Hackintool](https://github.com/headkaze/Hackintool):** Herramienta de diagnóstico post-instalación.
+* **[MaciASL](https://github.com/acidanthera/MaciASL):** Para compilar y editar parches ACPI (.dsl a .aml).
+
 
 ## 📝 To Do 
-
-Lista de tareas pendientes para perfeccionar el sistema:
 
 ### 🔧 Prioridad Alta
 - [ ] **Eliminar logs de arranque (Verbose):**
     - Quitar `-v` y `debug=0x100` de `boot-args`.
     - En `Misc -> Debug`, desactivar `Target` (poner a 3 o 0) y `ApplePanic`.
 - [ ] **Solucionar "Lagging" del Touchpad:**
-    - El cursor funciona pero con retraso debido al modo "Polling".
-    - *Posible solución:* Investigar parcheo manual de Pinning GPIO o probar downgrade de `VoodooI2C` a versión 2.8 para mejorar compatibilidad con ALPS.
+    - El cursor funciona pero con ligero retraso debido al modo "Polling" (`-vi2c-force-polling`).
+    - *Investigación:* Parcheo manual de Pinning GPIO o probar downgrade de `VoodooI2C` v2.8.
 - [ ] **Autoinicio directo (Skip OpenCore Menu):**
-    - En `config.plist` -> `Misc` -> `Boot`:
-        - `ShowPicker`: **False** (Oculta el menú).
-        - `Timeout`: **5** (Espera 5 seg y arranca automático).
-        - `PollAppleHotKeys`: **True** (Para poder mostrar el menú manteniendo presionada la tecla `Esc` o `Option` al arrancar si se necesita emergencia).
+    - `Misc` -> `Boot` -> `ShowPicker`: **False**.
+    - `Timeout`: **5**.
+    - `PollAppleHotKeys`: **True** (Permite usar ESC para mostrar menú en emergencia).
 
-- [ ] **Gestión de Energía Avanzada (CPUFriend):** Generar `CPUFriendDataProvider.kext` para optimizar las frecuencias del i7-7600U, mejorando la duración de batería y bajando la temperatura.
-- [ ] **Interfaz Gráfica (OpenCanopy):** Si decides volver a activar el menú de arranque, instalar el recurso `OpenCanopy` para tener iconos visuales tipo Mac real en lugar de texto simple.
-- [ ] **Hibernación:** Desactivar hibernación profunda (`sudo pmset -a hibernatemode 0`) para evitar corrupción de datos en Hackintosh.
+### 🎨 Mejoras
+- [ ] **Gestión de Energía Avanzada (CPUFriend):** Generar `CPUFriendDataProvider.kext` para optimizar frecuencias del i7-7600U.
+- [ ] **Interfaz Gráfica (OpenCanopy):** Instalar tema visual para el selector de arranque.
+- [ ] **Hibernación:** Desactivar hibernación profunda.
+
+
+## ⚠️ Disclaimer
+Por razones de seguridad, la información de **PlatformInfo** (Números de Serie, UUID, MLB y ROM) ha sido eliminada o "blanqueada" en el `config.plist`.
+**Debes generar tus propios seriales usando GenSMBIOS antes de intentar arrancar.** (Ver sección de Instrucciones).
