@@ -1,6 +1,6 @@
 # Hackintosh Dell Latitude 7480 - macOS Ventura
 
-![macOS Ventura](https://img.shields.io/badge/macOS-Ventura-blue) ![OpenCore](https://img.shields.io/badge/OpenCore-0.9.x-green) ![Status](https://img.shields.io/badge/Status-Functional-brightgreen)
+![macOS Ventura](https://img.shields.io/badge/macOS-Ventura-blue) ![OpenCore](https://img.shields.io/badge/OpenCore-0.9.x-green) ![Estado](https://img.shields.io/badge/Status-Functional-brightgreen)
 
 Este repositorio contiene la configuración EFI (OpenCore) que,  **me funciono a mi** para ejecutar macOS Ventura en una Dell Latitude 7480.
 
@@ -18,7 +18,7 @@ Este repositorio contiene la configuración EFI (OpenCore) que,  **me funciono a
 | **Touchpad** | ALPS I2C | Requiere configuración especial AlpsHID |
 | **Wifi/BT** | Intel Dual Band Wireless-AC | Requiere AirportItlwm |
 
-## ⚙️ BIOS
+## BIOS
 
 Para arrancar correctamente, la BIOS debe estar configurada así:
 
@@ -79,7 +79,6 @@ Este proyecto no sería posible sin las siguientes herramientas y documentación
 
 ## 📝 To Do 
 
-### 🔧 Prioridad Alta
 - [ ] **Eliminar logs de arranque (Verbose):**
     - Quitar `-v` y `debug=0x100` de `boot-args`.
     - En `Misc -> Debug`, desactivar `Target` (poner a 3 o 0) y `ApplePanic`.
@@ -91,12 +90,12 @@ Este proyecto no sería posible sin las siguientes herramientas y documentación
     - `Timeout`: **5**.
     - `PollAppleHotKeys`: **True** (Permite usar ESC para mostrar menú en emergencia).
 
-### 🎨 Mejoras
+### Mejoras
 - [ ] **Gestión de Energía Avanzada (CPUFriend):** Generar `CPUFriendDataProvider.kext` para optimizar frecuencias del i7-7600U.
 - [ ] **Interfaz Gráfica (OpenCanopy):** Instalar tema visual para el selector de arranque.
 - [ ] **Hibernación:** Desactivar hibernación profunda.
 
 
-## ⚠️ Disclaimer
+### ⚠️ Disclaimer
 Por razones de seguridad, la información de **PlatformInfo** (Números de Serie, UUID, MLB y ROM) ha sido eliminada o "blanqueada" en el `config.plist`.
 **Debes generar tus propios seriales usando GenSMBIOS antes de intentar arrancar.** (Ver sección de Instrucciones).
