@@ -62,7 +62,9 @@ Ubicados en `EFI/OC/ACPI`:
 * `-v`: Modo verbose (texto de arranque).
 * `keepsyms=1 debug=0x100`: Depuración de pánicos.
 * `alcid=11`: Habilita el audio (altavoces y micrófono).
-* `-vi2c-force-polling`: **Obligatorio** actualmente para que el cursor funcione (modo Polling), ya que el modo interrupción (GPIO) es inestable en este panel ALPS.
+* `-vi2c-force-polling`: **Obligatorio** actualmente para que el cursor (con el touchpad) funcione (modo Polling), ya que el modo interrupción (GPIO) es inestable en este panel ALPS.
+  > **Nota:** `-vi2c-force-polling` no afecta al uso del cursor con un mouse externo, eso funciona sin interrupciones.
+
 
 ## 🛠 Herramientas y Recursos Utilizados
 
