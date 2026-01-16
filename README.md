@@ -90,7 +90,7 @@ Este proyecto no sería posible sin las siguientes herramientas y documentación
 
 ## 📝 To Do 
 
-- [ ] **Eliminar logs de arranque (Verbose):**
+- [x] **Eliminar logs de arranque (Verbose):**
     - Quitar `-v` y `debug=0x100` de `boot-args`.
     - En `Misc -> Debug`, desactivar `Target` (poner a 3 o 0) y `ApplePanic`.
 - [ ] **Solucionar "Lagging" del Touchpad:**
