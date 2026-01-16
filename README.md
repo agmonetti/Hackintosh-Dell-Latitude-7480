@@ -1,8 +1,8 @@
-# Hackintosh Dell Latitude 7480 - macOS Ventura
+# Hackintosh Dell Latitude 7480 - macOS Monterrey
 
-![macOS Ventura](https://img.shields.io/badge/macOS-Ventura-blue) ![OpenCore](https://img.shields.io/badge/OpenCore-0.9.x-green) ![Estado](https://img.shields.io/badge/Status-Functional-brightgreen)
+![macOS Monterrey](https://img.shields.io/badge/macOS-Monterrey-blue) ![OpenCore](https://img.shields.io/badge/OpenCore-0.9.x-green) ![Estado](https://img.shields.io/badge/Status-Functional-brightgreen)
 
-Este repositorio contiene la configuración EFI (OpenCore) que,  **me funciono a mi** para ejecutar macOS Ventura en una Dell Latitude 7480.
+Este repositorio contiene la configuración EFI (OpenCore) que,  **me funciono a mi** para ejecutar macOS Monterey (Versión 12.7.4) en una Dell Latitude 7480.
 
 ## 💻 Especificaciones de Hardware
 
