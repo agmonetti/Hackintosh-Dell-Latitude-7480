@@ -4,6 +4,11 @@
 
 Este repositorio contiene la configuración EFI (OpenCore) que,  **me funciono a mi** para ejecutar macOS Monterey (Versión 12.7.4) en una Dell Latitude 7480.
 
+
+| About This Mac | Neofetch |
+| :---: | :---: |
+| <img src="images/about.jpg" width="400"> | <img src="images/neofetch.jpg" width="400"> |
+
 ## 💻 Especificaciones de Hardware
 
 | Componente | Detalle | Notas |
@@ -47,6 +52,9 @@ El orden de los Kexts en `config.plist` -> `Kernel` -> `Add` es estricto para ev
 12. **AlpsHID.kext** (Driver satélite específico para Dell ALPS)
 
 > **Nota:** `VoodooPS2Trackpad.kext` y el `VoodooInput` que viene dentro de PS2 deben estar **Desactivados (False)** en el config.plist.
+<p align="center">
+  <img src="images/trackpad.jpg" alt="trackpad" width="600">
+</p>
 
 ### Parches ACPI (SSDTs)
 Ubicados en `EFI/OC/ACPI`:
