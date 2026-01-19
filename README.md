@@ -7,7 +7,7 @@ Este repositorio contiene la configuración EFI (OpenCore) que,  **me funciono a
 
 | About This Mac | Neofetch |
 | :---: | :---: |
-| <img src="images/about.jpg" width="400"> | <img src="images/neofetch.jpg" width="400"> |
+| <img src="images/about.jpg" width="500"> | <img src="images/neofetch.jpg" width="500"> |
 
 ## 💻 Especificaciones de Hardware
 
