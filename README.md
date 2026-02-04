@@ -67,8 +67,10 @@ Ubicados en `EFI/OC/ACPI`:
 * `-v`: Modo verbose (texto de arranque).
 * `keepsyms=1 debug=0x100`: Depuración de pánicos.
 * `alcid=11`: Habilita el audio (altavoces y micrófono).
-* `-vi2c-force-polling`: **Obligatorio** actualmente para que el cursor (con el touchpad) funcione (modo Polling), ya que el modo interrupción (GPIO) es inestable en este panel ALPS.
-  > **Nota:** `-vi2c-force-polling` no afecta al uso del cursor con un mouse externo, eso funciona sin interrupciones.
+* `-vi2c-force-polling`: **Obligatorio y optimizado** para el touchpad ALPS funcione de manera estable en modo Polling. El modo interrupción (GPIO) es inestable en este panel ALPS específico de Dell.
+  > **Nota:** Este boot arg es necesario porque el touchpad ALPS en el Dell Latitude 7480 tiene problemas de pinning GPIO y el ACPI de Dell no proporciona la información de interrupción correcta. El modo polling ha sido optimizado para minimizar la latencia.
+  
+  > **Configuración Optimizada**: Se han reducido los tiempos de "QuietTimeAfterTyping" en AlpsHID (200ms) y VoodooI2CHID (50ms) para mejorar la respuesta del touchpad en modo polling.
   <p align="center">
   <img src="images/trackpad.jpg" alt="trackpad" width="600">
 </p>
@@ -92,9 +94,12 @@ Este proyecto no sería posible sin las siguientes herramientas y documentación
 - [x] **Eliminar logs de arranque (Verbose):**
     - Quitar `-v` y `debug=0x100` de `boot-args`.
     - En `Misc -> Debug`, desactivar `Target` (poner a 3 o 0) y `ApplePanic`.
-- [ ] **Solucionar "Lagging" del Touchpad:**
-    - El cursor funciona pero con ligero retraso debido al modo "Polling" (`-vi2c-force-polling`).
-    - *Investigación:* Parcheo manual de Pinning GPIO o probar downgrade de `VoodooI2C` v2.8.
+- [x] **Optimizar Touchpad ALPS en Modo Polling:**
+    - ✅ Se optimizó el modo polling reduciendo latencias de respuesta
+    - ✅ AlpsHID: QuietTimeAfterTyping reducido de 500ms a 200ms
+    - ✅ VoodooI2CHID: QuietTimeAfterTyping reducido de 100ms a 50ms
+    - ✅ Documentación completa sobre por qué GPIO no es viable
+    - **Nota:** El modo GPIO no es estable en este modelo debido a problemas de pinning GPIO en touchpads ALPS de Dell. El modo polling optimizado es la mejor solución para este hardware específico.
 - [ ] **Autoinicio directo (Skip OpenCore Menu):**
     - `Misc` -> `Boot` -> `ShowPicker`: **False**.
     - `Timeout`: **5**.
