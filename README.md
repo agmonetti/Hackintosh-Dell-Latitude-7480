@@ -67,7 +67,7 @@ Ubicados en `EFI/OC/ACPI`:
 * `-v`: Modo verbose (texto de arranque).
 * `keepsyms=1 debug=0x100`: Depuración de pánicos.
 * `alcid=11`: Habilita el audio (altavoces y micrófono).
-* `-vi2c-force-polling`: **Obligatorio y optimizado** para el touchpad ALPS funcione de manera estable en modo Polling. El modo interrupción (GPIO) es inestable en este panel ALPS específico de Dell.
+* `-vi2c-force-polling`: **Obligatorio y optimizado** para que el touchpad ALPS funcione de manera estable en modo Polling. El modo interrupción (GPIO) es inestable en este panel ALPS específico de Dell.
   > **Nota:** Este boot arg es necesario porque el touchpad ALPS en el Dell Latitude 7480 tiene problemas de pinning GPIO y el ACPI de Dell no proporciona la información de interrupción correcta. El modo polling ha sido optimizado para minimizar la latencia.
   
   > **Configuración Optimizada**: Se han reducido los tiempos de "QuietTimeAfterTyping" en AlpsHID (200ms) y VoodooI2CHID (50ms) para mejorar la respuesta del touchpad en modo polling.
